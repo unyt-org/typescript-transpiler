@@ -20,8 +20,8 @@ const tsSource = "..."
 const jsSource = await transpile(tsSource);
 ```
 
-To import the transpiler module directly in the browser without a transpilation step, use the [unyt.land]("https://unyt.land/x/ts_transpiler/mod.ts") import url.
-Alternativly, you can import the module from <https://deno.land/x/ts_transpiler/mod.ts>.
+To import the transpiler module directly in the browser without a transpilation step, use the [unyt.land](https://unyt.land/x/ts_transpiler/mod.ts) import url.
+Alternativly, you can import the module from [deno.land](https://deno.land/x/ts_transpiler/mod.ts).
 
 
 ### Transpiler Options
