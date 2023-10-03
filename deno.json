@@ -1,0 +1,11 @@
+{
+	"tasks": {
+	  "build": "deno run -A --unstable https://deno.land/x/wasmbuild@0.14.1/main.ts --out js"
+	},
+	"exclude": [
+	  "lib",
+	  "static",
+	  "target"
+	]
+  }
+  
