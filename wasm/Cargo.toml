@@ -1,16 +1,16 @@
 [package]
-name = "deno_emit_wasm"
+name = "typescript_transpiler"
 version = "0.0.0"
 edition = "2021"
 description = "module transpiling and emitting for deno"
-homepage = "https://deno.land/"
-repository = "https://github.com/denoland/deno_emit"
-authors = ["the Deno authors"]
+homepage = "https://unyt.org/"
+repository = "https://github.com/unyt-org/typescript-transpiler"
+authors = ["unyt.org"]
 license = "MIT"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
-name = "emit"
+name = "transpiler"
 
 [dependencies]
 anyhow = "1.0.44"

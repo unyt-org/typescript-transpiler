@@ -22,7 +22,6 @@ pub use deno_graph::source::Loader;
 #[serde(default, rename_all = "camelCase")]
 #[derive(Debug)]
 pub struct CompilerOptions {
-  pub check_js: bool,
   pub emit_decorator_metadata: bool,
   pub imports_not_used_as_values: String,
   pub inline_source_map: bool,
@@ -37,12 +36,11 @@ pub struct CompilerOptions {
 impl Default for CompilerOptions {
   fn default() -> Self {
     Self {
-      check_js: false,
       emit_decorator_metadata: false,
       imports_not_used_as_values: "remove".to_string(),
       inline_source_map: false,
       inline_sources: false,
-      jsx: "react".to_string(),
+      jsx: "".to_string(),
       jsx_factory: "React.createElement".to_string(),
       jsx_fragment_factory: "React.Fragment".to_string(),
       jsx_import_source: None,
@@ -89,11 +87,13 @@ pub fn transpile(
   >(maybe_compiler_options)
     .map_err(|err| JsValue::from(js_sys::Error::new(&err.to_string())))?
     .unwrap_or_default();
+  let enable_jsx = compiler_options.jsx.len()>0;
 
   let emit_options: EmitOptions = compiler_options.into();
+  let file_name = if enable_jsx {"file:///ts_transpiler/tmp.tsx"} else {"file:///ts_transpiler/tmp.ts"};
 
   let parser = &DefaultModuleParser::new();
-  let module_specifier = ModuleSpecifier::parse("file:///tmp.ts").expect("Invalid url.");
+  let module_specifier = ModuleSpecifier::parse(file_name).expect("Invalid url.");
   let parsed_source = parser.parse_module(&module_specifier, Arc::from(content), deno_ast::MediaType::from_specifier_and_headers(&module_specifier, None))
     .map_err(|err| JsValue::from(js_sys::Error::new(&err.to_string())))?;
 
